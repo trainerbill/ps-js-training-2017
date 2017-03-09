@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" ng-app>
+  <head>
+    <title>Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../lib/xcomponent/xcomponent.js"></script> <!-- https://github.com/krakenjs/xcomponent -->
+    <script src="../lib/helpers.js"></script>
+    <script src="login-component.js"></script> <!-- Pretend this is pulled in from our companys server -->
+  </head>
+  <body class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div id="exerciseOutput">
+          <h2>Exercise Output</h2>
+        </div>
+        <hr />
+        <div id="loginContainer"></div>
+        <div id="userInformation" style="display:none">
+          <div id="userEmail"></div>
+          <div id="userName"></div>
+          <button id="logoutButton" class="btn btn-default">Log Out</button>
+        </div>
+        <a href="index.html">Go Back</a>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+
+      LoginComponent.renderLightbox({
+          // Implement email property
+          email: 'test@awesome.com',
+
+          //Implement getUser property
+            // set the message that is returned equal to the props user property (this.props.user)
+            // If email property is not undefined hide the component
+            // Call the logout defauned below.  You will have to use the .apply function to apply the this context.
+            // Call displayUserInformation with the user object
+          getUser: function(user) {
+            
+          },
+
+          // Implement onLogin property
+            // Check message for email property.  
+            // if its set then the user is logged in
+              // Use an alert to say 'Congrats on the login'
+              // Call the getUser function passing the response
+          onLogin: function(user) {
+              
+          },
+          
+      });
+
+      
+      function logout () {
+        var component = this;
+        var user = component.props.user;
+        // Set logoutButton onclick
+        // Call users logout function
+        // Then use the .show method of the component to show the lightbox again.
+        
+      }
+      
+    </script>
+
+  </body>
+</html>
