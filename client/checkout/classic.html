@@ -20,6 +20,17 @@
             document.getElementById('error-message').textContent = err.message;
             showDom('paypal-error');
         }
+        
+        function formPopulate(data) {
+            
+            document.getElementById('paypal-details').textContent = JSON.stringify(data, null, 2);
+            document.getElementById('firstName').value = data.FIRSTNAME;
+            document.getElementById('lastName').value = data.LASTNAME;
+            document.getElementById('street').value = data.SHIPTOSTREET;
+            showDom('paypal-details');
+            showDom('paypal-confirmation');
+        
+        }
         // END Setup
 
         // Create a function to call the SetExpressCheckout API 
@@ -33,9 +44,7 @@
         // Create a function to call the getExpressCheckout API
             // Take a look at the data object for the token.
             // Use PayPal library to call getexpresscheckout api endpoint GET /paypal/classic/getexpresscheckout/YOURTOKEN
-                // Then put the response in paypal-details DOM
-                // Populate teh form values
-                // You should be able to get most of this form a previous exercise.
+                // call formPopulate function with the response
         function getExpressCheckout(data, actions) {
             
         }
@@ -77,6 +86,10 @@
         // Dont forget cancel and error
         paypal.Button.render({
             env: 'sandbox',
+            payment: setExpressCheckout,
+            onAuthorize: onAuthorize,
+            onCancel: onCancel,
+            onError: onError,
             style: {
                 size: 'medium',
                 color: 'yellow',
