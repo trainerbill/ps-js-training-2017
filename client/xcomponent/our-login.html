@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="//spin.js.org/spin.min.js"></script>
-    <script src="../lib/xcomponent/xcomponent.js"></script>
+    <script src="../lib/xcomponent/xcomponent.min.js"></script>
     <script src="login-component.js"></script> 
     <script src="../lib/helpers.js"></script>
   </head>
@@ -34,8 +34,10 @@
           var user = new User(localStorage.getItem('user'));
           // END Exercise Setup.
           
-          // Figure out where to get the xcomponent properties
-          // Use xcomponent to prefill email input
+          // PART 3: Implement Email xprop
+            // set email input to value of email xprop.
+          
+          
           
 
           document.getElementById('submitButton')
@@ -46,13 +48,14 @@
               
               setTimeout(function () {
                 
-                // Set user object email property to input value
                 
-
-                // Call user login function with email
+                user.email = document.getElementById('exampleInputEmail1').value;
+                user.login(document.getElementById('exampleInputEmail1').value);
                 
-
-                // Call xcomponent onLogin with user argument
+                
+                // PART 3: Implement onLogin xprop
+                  // call the function and send it user variable
+                
                 
 
                 
@@ -63,7 +66,8 @@
             });
 
 
-            // Use xcomponent to send user to the parent
+            // PART 3: Implement getUser xprop
+              // call the function and send it user variable
             
               
         </script>

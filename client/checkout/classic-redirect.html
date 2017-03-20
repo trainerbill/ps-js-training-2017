@@ -29,23 +29,18 @@
         
 
         
-        // Create an onAutorize Callback function
-            // Set a breakpoint in the onAuthorize function below to see what actions is
-            // Use actions to redirect the user to the RETURNURL
-            // You should return a function execution
+        
         function onAuthorize(data, actions) {
+            // Redirect the user to the RETURNURL
             
         }
 
-        // Create an onCancel Callback function
-            // Use actions to redirect the user to the CANCELURL
-            // You should return a function execution
         function onCancel(data, actions) {
+            // Redirect the user to the CANCELURL
             
         }
     
 
-        // Call the correct functions in the correct event callbacks
         paypal.Button.render({
             env: 'sandbox',
             payment: setExpressCheckout,

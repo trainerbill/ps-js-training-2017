@@ -33,20 +33,21 @@
           var user = new User();
           // END Exercise Setup.
 
-          // Create event listener to listen for messages on the parent window.
-          // Parse the event data from a string to an object
-          // Check the message type property.
-          // If the type is "email" 
-            // set the exampleInputEmail1 input value to the email in the message.  
-            // Send a message back to the parent.  The message should be a stringified object with property type equal to "email"
+          // PART 2: Create an event listener to receive the email message.
+            // Parse the events data property from a string to an object
+            // Check the message type property.
+              // If the type is "email" 
+                // set the exampleInputEmail1 input value to the email in the message.  
+                // Send a confirmation message back to the parent.  The message should be a stringified object with property type equal to "email"
 
-           
-
-          // Create an event listener for click on the submit button
-          // Prevent the Default behavior of the click.
-          // Hide the login form and display the spinner
           
 
+          
+          // END PART 2
+
+          // Event listener for click on the submit button
+          // Prevent the Default behavior of the click.
+          // Hide the login form and display the spinner
           document
             .getElementById('submitButton')
             .addEventListener('click', function (event) {
@@ -57,13 +58,21 @@
 
               setTimeout(function () {
 
-                // Set the users email property to the value of the input 
+                user.login(document.getElementById('exampleInputEmail1').value);
+                var loginMessage = {
+                  type: 'onLogin',
+                  user: user
+                };
 
+                // PART 3: Send the loginMessage to the parent window
+                  // Use postMessage.
+                  // Window is the parent property of the window object.
+                  // loginMessage must be a string.
+                  // Use "*" as the domain.  
 
-                // Create a variable loginMessage and set the 'type' property to onLogin, and the 'user' property to the user variable.
+                  
 
-
-                // Send a message to the parent window with the loginMessage and "*" as the domain.  loginMessage must be a string.
+                // END PART 3
 
               }, 2000);
 

@@ -27,6 +27,25 @@
 
       //Exercise Setup.  Do Not Touch
 
+      function handleMessage(data) {
+
+        if (!data) {
+          throw new Error('Must be called with data.');
+        }
+
+        if (typeof data !== 'object') {
+          throw new Error('You must stringify first');
+        }
+
+        if (data.type === 'email') {
+          addOutput('Received Email Message');
+        } else if (data.type === 'onLogin') {
+          addOutput('Received onLogin Message');
+          displayUserInformation(data.user);
+        }
+
+      }
+
       // Create an Iframe
       var iframe = document.createElement('iframe');
       iframe.height = '400px';
@@ -34,8 +53,6 @@
       iframe.src = 'our-login.html';
 
       document.getElementById('loginContainer').appendChild(iframe);
-
-      
 
       // The Email message
       var emailMessage = {
@@ -49,20 +66,31 @@
       
       // When our iframe is loaded
       iframe.onload = function () {
-        // use addOutput function to add the text 'Sending Email Message' to the DOM.
-        // Send the message variable to the iframe.
-        // The message must be a string.
-        // Use "*" as the domain
+        addOutput('Sending Email Message');
+        // PART 1: Send the emailMessage variable to the iframe.
+          // Use postMessage
+          // You must use the postMessage function on the content property of the iframe variable
+          // The message must be a string.
+          // Use "*" as the domain
+
+
+        // END Part 1
+        
        
       };
 
+      // PART 4: 
+
       // Create a window Event Listener for 'message';
+      // console.log the event.  console.log('login.html event', event);
       // Parse the event data into a new variable named data.
-      // Check the type property of the new data variable
-      // If the type is "email", use addOutput function to add the text 'Received Email Message' to the DOM.
-      // Otherwise if the type is "onLogin", 
-        //call display user information function with the user property. 
-        //use addOutput function to add the text 'Received onLogin Message' to the DOM.
+      // Call handleMessage function with data variable
+
+
+
+      // END PART 4
+
+      
       
       
       

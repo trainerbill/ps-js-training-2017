@@ -21,18 +21,18 @@
             showDom('paypal-error');
         }
 
-        function handleResponse(result) {
-            document.getElementById('paypal-execute-details').textContent = JSON.stringify(result, null, 2);
-            showDom('paypal-end');
-        }
-
+        var setOnclick = false;
         function setupExecute(data, actions) {
-            document
-                .getElementById('submitButton')
-                .addEventListener('click', function (event) {
-                    event.preventDefault();
-                    doExpressCheckout(data, actions);
-                });
+            if (!setOnclick) {
+                document
+                    .getElementById('submitButton')
+                    .addEventListener('click', function (event) {
+                        event.preventDefault();
+                        doExpressCheckout(data, actions);
+                    });
+            }
+            
+            setOnclick = true;
         }
         
         function formPopulate(data) {
@@ -53,6 +53,49 @@
             ]);
         }
 
+        function setExpressCheckout() { 
+            return paypal
+                    .request
+                    .get('/paypal/classic/setexpresscheckout')
+                    .then(function (data) {
+                        return data.TOKEN;
+                    });
+        }
+            
+        function getExpressCheckout(data, actions) {
+            return paypal
+                    .request
+                    .get('/paypal/classic/getexpresscheckout/' + data.paymentToken)
+                    .then(formPopulate);
+            
+        }
+
+        function doExpressCheckout(data, actions) {
+
+            var nvpParams = {
+                TOKEN: 'YOURTOKEN',
+                PAYERID: 'YOURPAYERID',
+                PAYMENTACTION: 'YOURPAYMENTACTION'
+            };
+            
+            nvpParams.TOKEN = data.paymentToken;
+            nvpParams.PAYERID = data.payerID;
+            nvpParams.PAYMENTACTION = data.intent;
+
+            return paypal
+                    .request
+                    .post('/paypal/classic/doexpresscheckout', nvpParams)
+                    .then(function (result) {
+                        if (result.ACK === 'Success') {
+                            document.getElementById('paypal-execute-details').textContent = JSON.stringify(result, null, 2);
+                            showDom('paypal-end');
+                        } else {
+                            handle10486(data, actions);
+                        }
+                    });
+
+        }
+
         paypal.Button.render({
             env: 'sandbox',
             payment: setExpressCheckout,
@@ -64,60 +107,19 @@
                 color: 'yellow',
                 shape: 'rect'
             },
-            commit: true
         }, '#paypal-button');
-
         // END Setup
 
-        // Create a function to call the SetExpressCheckout API 
-            
-        function setExpressCheckout() {
 
-            // PART 1: Complete the setExpressCheckout function
-                // Use PayPal library to call the Setexpress checkout API endpoint GET /paypal/classic/setexpresscheckout
-                // In the then callback return the TOKEN property of the response
-                // Return the response from the function call
-            
-
-
-            // END PART 1
+        
+        function handle10486(data, actions) {
+            // PART 1: Finish the 10486 recovery function
+            // Use the correct action to relaunch the paypal flow.
             
         }
             
-        function getExpressCheckout(data, actions) {
-
-            // PART 2: Complete getExpressCheckout function
-                // Use PayPal library to call getexpresscheckout api endpoint GET /paypal/classic/getexpresscheckout/YOURTOKEN
-                // call formPopulate function with the response
-            
-
-            // END PART 2
-            
-        }
-
         
-        function doExpressCheckout(data, actions) {
 
-            var nvpParams = {
-                TOKEN: 'YOURTOKEN',
-                PAYERID: 'YOURPAYERID',
-                PAYMENTACTION: 'YOURPAYMENTACTION'
-            };
-
-            // PART 3: Complete doExpressCheckout function
-                // Set nvpParams properties to the correct properties in data
-                // Use paypal library to call doexpresscheckout api endpoint POST /paypal/classic/doexpresscheckout
-                    // Send the nvpParams variable with the api call.
-                    // Then call the handleResponse function with the response from the api call.
-            
-
-            
-
-            // END PART 3
-        }
-
-        
-        
 
     </script>
     <div id="paypal-error" style="display:none">

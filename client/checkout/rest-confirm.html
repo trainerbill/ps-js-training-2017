@@ -35,6 +35,15 @@
                     });
         }
 
+        function setupExecute(data, actions) {
+            document
+                .getElementById('submitButton')
+                .addEventListener('click', function (event) {
+                    event.preventDefault();
+                    executePayment(data, actions);
+                });
+        }
+
         function onCancel() {
             showDom('paypal-cancel');
         }
@@ -43,45 +52,22 @@
             document.getElementById('error-message').textContent = err.message;
             showDom('paypal-error');
         }
-        // END Setup
 
-        // Create a function to execute payment get and return the promise. Then:
-            // Place entire response in the paypal-details DOM id
-            // Use .textContent
-                // Use JSON.stringify(data, null, 2);
-                // Move on to next function and come back and complete the part below.
-            // Place the first name, last name, and street from the response in the confirmation form.
-            // Show the confirmation DOM id
-        
-        function getPayment(data, actions) {
-            
-        }
+        var client = {
+            sandbox:    'AQzwHJt9jZAyQbf-DnaqZefvbTCMammV7ZFsnW23thr9qUQX9RGMgSVbzRjxXTAODKjh2W0k6Ei4Q2m9'
+        };
 
-        // Create a function executeSetup.
-            // Use paypal library to return a new promise.
-            // Create click event listener and attach it to the submitButton DOM id
-                // Remember to prevent default.
-                // execute payment.
-            // resolve the promise immediatley after setting the on click event
+        function prepopulate(data) {
+            document.getElementById('paypal-details').textContent = JSON.stringify(data, null, 2);
+            document.getElementById('firstName').value = data.payer.payer_info.first_name;
+            document.getElementById('lastName').value = data.payer.payer_info.last_name;
+            document.getElementById('street').value = data.payer.payer_info.shipping_address.line1;
+            showDom('paypal-confirmation');
+        } 
 
-        function executeSetup(data, actions) {
-            
-        }
-        
-        // Use paypal.Promise.all to execute the newly created functions at the same time
-        // Pro Tip: the one argument to all function is an array of promises
-        // return the result of the all function
-        function onAuthorize(data, actions) {
-            
-        }
-    
-
-        // You shouldn't need to do anything below this.
         paypal.Button.render({
             env: 'sandbox',
-            client: {
-                sandbox:    'AQzwHJt9jZAyQbf-DnaqZefvbTCMammV7ZFsnW23thr9qUQX9RGMgSVbzRjxXTAODKjh2W0k6Ei4Q2m9'
-            },
+            client: client,
             payment: createPayment,
             onAuthorize: onAuthorize,
             onCancel: onCancel,
@@ -92,6 +78,32 @@
                 shape: 'rect'
             }
         }, '#paypal-button');
+        // END Setup
+
+        
+        function getPayPalInformation(data, actions) {
+            // PART 1: Complete the getPayPalInformation function
+                // Complete the getPayPalInformation function to execute the payment get function and return the promise.
+                // then call the prepoluate function with the data returned from paymen get.
+            
+            // END PART 1
+        }
+
+        
+        
+        
+        function onAuthorize(data, actions) {
+            // PART 2: Complete the onAuthorize function
+                // Use paypal.Promise.all to execute the getPayPalInformation and setupExecute functions
+                // Pro Tip: the one argument to all function is an array of promises
+                // return the result of the all function
+            
+            // END PART 2
+        }
+    
+
+       
+        
 
     </script>
     <div id="paypal-error" style="display:none">
