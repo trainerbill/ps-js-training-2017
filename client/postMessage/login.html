@@ -68,9 +68,8 @@
       iframe.onload = function () {
         addOutput('Sending Email Message');
         // PART 1: Send the emailMessage variable to the iframe.
-          // Use postMessage
-          // You must use the postMessage function on the content property of the iframe variable
-          // The message must be a string.
+          // You must use the postMessage function on the contentWindow property of the iframe variable
+          // Send the emailMessage variable as a string
           // Use "*" as the domain
 
 
@@ -80,10 +79,8 @@
       };
 
       // PART 4: 
-
       // Create a window Event Listener for 'message';
-      // console.log the event.  console.log('login.html event', event);
-      // Parse the event data into a new variable named data.
+      // JSON.parse the event data into a new variable named data.
       // Call handleMessage function with data variable
 
 
