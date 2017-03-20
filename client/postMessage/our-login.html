@@ -34,11 +34,13 @@
           // END Exercise Setup.
 
           // PART 2: Create an event listener to receive the email message.
-            // Parse the events data property from a string to an object
-            // Check the message type property.
+            // Parse the events data property from a string to an object into a variable called data
+            // Check the data variables message type property.
               // If the type is "email" 
-                // set the exampleInputEmail1 input value to the email in the message.  
-                // Send a confirmation message back to the parent.  The message should be a stringified object with property type equal to "email"
+                // set the exampleInputEmail1 input value to the data variables message property. 
+                  // document.getElementById('exampleInputEmail1').value 
+                // call postMessage on the parent window, window.parent to send a confirmation message back to the parent.
+                  // The message should be a stringified object with property type equal to "email"
 
           
 
