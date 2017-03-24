@@ -28,10 +28,13 @@ function paypalCheckoutReady() {
             },
             payment: function () {
                 // Return the EC token from the merchants site
-                return 'EC-9A789748PK7280724';
+                return 'EC-6P126839R4483701Y';
             },
             onAuthorize: function (data, actions) {
                 return actions.redirect();
+            },
+            style: {
+                color: 'blue'
             }
         }, oldButton);
     }
