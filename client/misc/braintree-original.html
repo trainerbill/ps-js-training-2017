@@ -54,40 +54,6 @@
     <script src="https://js.braintreegateway.com/web/3.11.1/js/data-collector.min.js"></script>
 
     <script>
-        // Exercise Setup
-        
-        function onCancel() {
-            showDom('paypal-cancel');
-        }
-        function onError(err) {
-            document.getElementById('error-message').textContent = err.message;
-            showDom('paypal-error');
-        }
-
-        function handleResponse(result) {
-            document.getElementById('paypal-execute-details').textContent = JSON.stringify(result, null, 2);
-            showDom('paypal-end');
-        }
-
-        function setupFinish(data) {
-            
-            document.getElementById('paypal-details').textContent = JSON.stringify(data, null, 2);
-            document.getElementById('firstName').value = data.details.firstName;
-            document.getElementById('lastName').value = data.details.lastName;
-            document.getElementById('street').value = data.details.shippingAddress.line1;
-            showDom('paypal-details');
-            showDom('paypal-confirmation');
-            setClick(data);
-        }
-
-        function setClick(result) {
-            document
-                .getElementById('submitButton')
-                .addEventListener('click', function (event) {
-                    event.preventDefault();
-                    transactionSale(result);
-                });
-        }
 
         var auth = 'sandbox_mpkhypqr_wkqn2r5yxbvdgs4r';
 
@@ -99,8 +65,6 @@
             amount: '10.00'
         };
         
-
-
         braintree.client.create({
             authorization: auth
         }, function (clientErr, clientInstance) {
@@ -112,43 +76,20 @@
 
             braintree.paypal.create({
                 client: clientInstance
-            }, function (paypalCheckoutErr, paypalInstance) {
-
-            braintree.paypal.create({
-                client: clientInstance
             }, function (paypalErr, paypalInstance) {
                 document
                     .getElementById('paypal-button')
                     .addEventListener('click', function (event) {
                         event.preventDefault();
                         paypalInstance.tokenize(braintreePaypalOptions, function (err, result) {
-                            document.getElementById('paypal-execute-details').html = JSON.stringify(result, 0, 2);
-                            showDom('paypal-end');
+                            console.log('After token', err, result, document.getElementById('paypal-details'));
+                            document.getElementById('paypal-details').textContent = JSON.stringify(result, 0, 2);
+                            showDom('paypal-details');
                         });
                     });
             });
+        
         });
-    });
-
-    
-    function transactionSale(data) {
-        var params = {
-            nonce: data.nonce,
-            amount: '10.00'
-        }
-        
-        // PART 3: Complete the Sale transaction
-            // use the paypal library to execute the AJAX call POST /braintree/sale/nonce
-                // Send the params variable
-            // Then call the handleResponse function
-        
-        return paypal
-                .request
-                .post('/braintree/sale/nonce', params)
-                .then(handleResponse);
-
-        // END PART 3
-    }
 
     
 
