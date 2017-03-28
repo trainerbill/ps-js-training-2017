@@ -18,7 +18,7 @@
                 <input type="text" class="form-control" id="testInput" placeholder="Fails on less than 3 characters" name="testInput" minlength="3">
             </div>
         </form>
-        <div id="paymentMethods" style="display:none">
+        <div id="paymentMethods">
             <form id="paypal-button1" action="/misc/setexpresscheckout"></form>
             <div>Some Cool Text</div>
             <form id="paypal-button2" action="/misc/setexpresscheckout"></form>
@@ -37,6 +37,11 @@
     </div>
 
     <script type="text/javascript">
+
+        function validateForm() {            
+            return document.getElementById('testInput').value.length > 3;
+        }
+
         // Comment me out when starting the exercise.
         
         window.paypalCheckoutReady = function () {
@@ -97,6 +102,7 @@
             // Redirect in the onAuthorize callback
             // Redirect the user in the onCancel callback
             // Make sure you use the styling and commit properties from the button config
+            // Add style="display:none" to the paymentMethods DOM id
             
         
         
