@@ -15,7 +15,7 @@
         <form id="testForm">
             <div class="form-group">
                 <label for="testInput">testInput</label>
-                <input type="text" class="form-control" id="testInput" placeholder="Fails on less than 3 characters" name="testInput" minlength="3">
+                <input type="text" class="form-control" id="testInput" placeholder="Fails on less than 3 characters" name="testInput" minlength="3" required>
             </div>
         </form>
         <div id="paymentMethods">
@@ -95,9 +95,8 @@
 
         // PART 1: Create the checkout.js integration
             // Use buttonConfig for multiple buttons
-            // Configure the buttons properly
-            // Call the same endpoint using the paypal library
-            // Set the proper event callbacks.
+            // Set the environment
+            // Create payment callback to use the paypal library to call the same endpoint
             // Call onError on Error 
             // Redirect in the onAuthorize callback
             // Redirect the user in the onCancel callback
@@ -110,8 +109,8 @@
 
         var input = document.getElementById('testInput');
 
-        // PART 2: Validate the form on change of input field
-            // Create an on change event listener
+        // PART 2: Validate the form on keyup of input field
+            // Create a keyup event listener
             // execute the inputs checkValidity function
             // If the form is valid execute showDom('paymentMethods');
             // otherwise  hideDom('paymentMethods');
