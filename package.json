@@ -10,7 +10,8 @@
     "build:watch": "npm run clean && babel src -d dist --copy-files",
     "start": "npm run build && node dist/index.js",
     "start:dev": "supervisor -w src/ -- -r 'babel-register' src/index.js",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "preinstall": "$HOME/.nvm/nvm.sh use 4"
   },
   "repository": {
     "type": "git",
